@@ -1,0 +1,559 @@
+/* src/style.css */
+
+/* Overall Container & Base Layout */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Loading Overlay & Transition Overlay (Enhanced Design) */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0F0817 0%, #2D1B69 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: #fff;
+  font-size: 1.2em;
+  gap: 15px;
+  opacity: 0;
+  animation: fadeInOverlay 0.5s forwards;
+  backdrop-filter: blur(5px);
+}
+
+.loading-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-left: 4px solid #8B5CF6;
+  border-right: 4px solid #EC4899;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite, fadePulse 1.5s ease-in-out infinite;
+}
+
+.loading-message {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+/* For blurring content during loading/transition */
+.blurred-content {
+    filter: blur(8px);
+    pointer-events: none;
+    transition: filter 0.5s ease-out;
+}
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Detection Phase Styles */
+.detection-phase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #22183D;
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition: filter 0.5s ease-out;
+  min-height: 480px;
+}
+
+#video {
+  width: 100%;
+  max-width: 640px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background-color: #000;
+}
+
+.mood-display {
+  font-size: 1.6em;
+  font-weight: 600;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 30px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+/* Player Phase Styles - Default for smaller screens (like 50% split view) */
+.player-phase {
+  background-color: #3A2B70;
+  border-radius: 24px;
+  padding: 1.2rem 1.2rem 1.8rem 1.2rem;
+  width: 100%; /* Always take 100% of available width up to max-width */
+  width: 60vw; /* Default: 85vw for smaller/half screen as requested */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  margin: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 480px;
+  justify-content: space-between;
+  min-width: 320px; /* Ensures it doesn't get too small on tiny screens */
+}
+
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.player-header h1 {
+  font-size: 2.2rem;
+  margin: 0;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.mood-tag {
+  background: linear-gradient(90deg, #8B5CF6, #EC4899);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+}
+
+/* Mood-specific colors for mood-tag */
+.mood-tag.mood-happy { background: linear-gradient(90deg, #FFD700, #FF8C00); }
+.mood-tag.mood-sad { background: linear-gradient(90deg, #6495ED, #4682B4); }
+.mood-tag.mood-angry { background: linear-gradient(90deg, #DC143C, #B22222); }
+.mood-tag.mood-neutral { background: linear-gradient(90deg, #A9A9A9, #778899); }
+
+
+.search-bar {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.search-bar input {
+  width: calc(100% - 3.5rem);
+  padding: 0.8rem 1rem 0.8rem 3rem;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 0.95em;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.search-bar input:focus {
+  border-color: #8B5CF6;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+}
+
+.search-bar::before {
+  content: "🔍";
+  position: absolute;
+  left: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  pointer-events: none;
+  font-size: 1.2em;
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.playlist {
+  margin: 1rem 0;
+  max-height: 280px;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Custom scrollbar for WebKit browsers */
+.playlist::-webkit-scrollbar {
+  width: 8px;
+}
+
+.playlist::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.playlist::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.4);
+  border-radius: 4px;
+}
+
+.playlist::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.6);
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem;
+  margin: 0.4rem 0;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  overflow: hidden;
+  transform-origin: center center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border: 1px solid transparent;
+  isolation: isolate;
+  gap: 1.5rem;
+}
+
+.playlist-item::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  background: conic-gradient(
+    #8B5CF6,
+    #EC4899,
+    #8B5CF6,
+    #EC4899,
+    #8B5CF6
+  );
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  z-index: -1;
+  filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: none;
+  pointer-events: none;
+}
+
+.playlist-item::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 12px;
+  background-color: #3A2B70;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.playlist-item:hover {
+  transform: scale(1.01);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: transparent;
+}
+
+.playlist-item:hover::before {
+  opacity: 1;
+  animation: snakeBorder 3s linear infinite;
+}
+
+.playlist-item:hover::after {
+  opacity: 1;
+}
+
+@keyframes snakeBorder {
+  0% {
+    background-position: 0% 0%;
+    transform: rotate(0deg);
+  }
+  100% {
+    background-position: 200% 200%;
+    transform: rotate(360deg);
+  }
+}
+
+.playlist-item.active {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.25), rgba(236, 72, 153, 0.15));
+  border: 1px solid #8B5CF6;
+  box-shadow: 0 0 0 1px #8B5CF6, 0 2px 8px rgba(0, 0, 0, 0.3);
+  transform: scale(1.01);
+}
+
+.playlist-item.active::before {
+  opacity: 1;
+  animation: snakeBorder 3s linear infinite;
+}
+.playlist-item.active::after {
+  opacity: 1;
+}
+
+
+.playlist-item img {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.song-details {
+  flex: 1;
+  text-align: left;
+  min-width: 0;
+}
+
+.song-title {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.95em;
+}
+
+.song-artist { /* This style now applies to "Artist • Album" */
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Ensure it has enough flexibility to truncate */
+}
+
+.song-duration {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85em;
+  flex-shrink: 0;
+}
+
+.player-controls {
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 1.2rem;
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 0;
+}
+
+/* Style for current song title on controls */
+.current-song-title-on-controls {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.controls button:hover {
+  opacity: 0.7;
+  transform: scale(1.03);
+  color: #EC4899;
+}
+
+/* Play/Pause button - Small, with hover glow */
+#togglePlay {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(45deg, #8B5CF6, #EC4899);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 3px 12px rgba(139, 92, 246, 0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Play/Pause button hover glow effect */
+#togglePlay:hover {
+    box-shadow: 0 0 15px 4px rgba(139, 92, 246, 0.8),
+                0 0 25px 8px rgba(236, 72, 153, 0.5);
+    transform: scale(1.03);
+}
+
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8em;
+}
+
+.progress {
+  flex: 1;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: visible;
+}
+
+.progress-filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #8B5CF6, #EC4899);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.progress-filled::after {
+  content: '';
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(45deg, #A78BFA, #F06292);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+.progress-filled:hover::after {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.progress-filled:active::after {
+  cursor: grabbing;
+  transform: translateY(-50%) scale(0.9);
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.volume-control span {
+  font-size: 1em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 70px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(45deg, #8B5CF6, #EC4899);
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -4px;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+  transition: all 0.2s ease;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(45deg, #8B5CF6, #EC4899);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+}
+
+.volume-slider:hover::-webkit-slider-thumb,
+.volume-slider:focus::-webkit-slider-thumb {
+  background: linear-gradient(45deg, #A78BFA, #F06292);
+  transform: scale(1.05);
+}
+
+.volume-slider:hover::-moz-range-thumb,
+.volume-slider:focus::-moz-range-thumb {
+  background: linear-gradient(45deg, #A78BFA, #F06292);
+  transform: scale(1.05);
+}

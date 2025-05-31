@@ -1,0 +1,215 @@
+/* src/Login.css */
+
+/* Login Container - Now acts as the centering container */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw; /* Take full width */
+  height: 100vh; /* Take full height */
+  position: relative; /* Needed for stacking context for its children */
+  z-index: 3; /* Above body::before and body::after */
+  /* REMOVED: background-image, filter, fixed positioning from here */
+  /* background is now handled by body::before in index.css */
+}
+
+/* REMOVED: .login-overlay styles (handled by body::after in index.css) */
+/* REMOVED: .login-card-wrapper styles (no longer needed in JSX) */
+
+/* Login Card - Glassmorphism Effect */
+.login-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px); /* FROSTED GLASS EFFECT */
+  -webkit-backdrop-filter: blur(15px); /* For Safari compatibility */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 448px;
+  box-sizing: border-box;
+  position: relative; /* Keep relative for inner content positioning */
+  z-index: 10; /* Ensure card is on top */
+  animation: fadeInFromTop 0.8s ease-out; /* Fade in animation */
+}
+
+@keyframes fadeInFromTop {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Icon Wrapper */
+.login-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.login-icon-background {
+  background-color: #6b46c1;
+  padding: 16px;
+  border-radius: 9999px;
+  box-shadow: 0 0 15px rgba(107, 70, 193, 0.6);
+}
+
+.login-music-icon {
+  color: #fff;
+  font-size: 28px;
+}
+
+/* Titles and Subtitles */
+.login-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #f78282;
+  margin-bottom: 8px;
+  text-shadow: 0 0 5px rgba(247, 130, 130, 0.3);
+}
+
+.login-subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 24px;
+}
+
+/* Form Spacing */
+.login-form > div + div,
+.login-form > button,
+.login-form > p {
+  margin-top: 16px;
+}
+
+/* Form Labels */
+.form-label {
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  margin-bottom: 4px;
+}
+
+/* Form Inputs */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #805ad5;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(128, 90, 213, 0.3);
+}
+
+/* Error/Success Messages */
+.login-card p.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9em;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.login-card p.success {
+  color: lightgreen;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9em;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Form Options */
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+}
+
+.remember-me-checkbox {
+  margin-right: 8px;
+}
+
+.forgot-password {
+  color: #a78bfa;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Sign In / Register Button */
+.sign-in-button {
+  width: 100%;
+  background: linear-gradient(to right, #805ad5, #d53f8c);
+  color: #fff;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sign-in-button:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(128, 90, 213, 0.5);
+}
+
+.sign-in-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Sign Up Text / Link */
+.signup-text {
+  text-align: center;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 20px;
+}
+
+.signup-link {
+  color: #a78bfa;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments for smaller screens (if needed) */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px;
+  }
+  .login-title {
+    font-size: 24px;
+  }
+  .login-music-icon {
+    font-size: 24px;
+  }
+}
